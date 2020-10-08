@@ -1,0 +1,10 @@
+Starting Nmap 7.70 ( https://nmap.org ) at 2020-10-08 08:25 BST
+Nmap scan report for 10.3.141.107
+Host is up (0.015s latency).
+MAC Address: C0:8C:71:61:E5:24 (Unknown)
+Nmap scan report for 10.3.141.144
+Host is up.
+MAC Address: D4:AB:CD:53:1C:AD (Unknown)
+Nmap scan report for 10.3.141.1
+Host is up.
+Nmap done: 256 IP addresses (3 hosts up) scanned in 7.57 seconds
