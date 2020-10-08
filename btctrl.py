@@ -1,9 +1,14 @@
+#!/usr/bin/python3
+
 from evdev import InputDevice, categorize, ecodes
 import os
+import urllib.parse
 
 keyboard = InputDevice('/dev/input/event0')
 
 shift=False
+ctrl=False
+caps=False
 
 print(keyboard)
 
@@ -12,16 +17,30 @@ ip_address = "localhost"
 with open('/etc/tv-keyboard-ctrl/found_ip') as f:
 	ip_address = f.readline()[:-1]
 
+def nonlitaction(term):
+	os.system("curl -d '' \"http://" + ip_address + ":8060/keypress/" + term + "\"")
+
 def action(term):
-	os.system("curl -d '' \"http://" + ip_address + ":8060/keypress/Lit_" + term + "\"")
+	if caps:
+		os.system("curl -d '' \"http://" + ip_address + ":8060/keypress/Lit_" + urlencode(term.upper()) + "\"")
+	else:
+		os.system("curl -d '' \"http://" + ip_address + ":8060/keypress/Lit_" + urlencode(term) + "\"")
+
+def urlencode(term):
+	return urllib.parse.quote(term)
 
 for event in keyboard.read_loop():
 	if event.type == ecodes.EV_KEY:
 		if event.value == 1:
-			if event.code == 42:
+			'''if event.code == 42: #leftshift
 				shift=True
-			if event.code == 54:
+			if event.code == 54: #rightshift
 				shift=True
+			if event.code == 58:
+				if caps:
+					caps=False
+				else:
+					caps=True
 			if event.code == 16:
 				if shift:
 					action("Q")
@@ -100,7 +119,7 @@ for event in keyboard.read_loop():
 			if event.code == 35:
 				if shift:
 					action("H")
-				else: 
+				else:
 					action("h")
 			if event.code == 36:
 				if shift:
@@ -152,8 +171,128 @@ for event in keyboard.read_loop():
 					action("M")
 				else:
 					action("m")
+			if event.code == 41:
+				if shift:
+					action("~")
+				else:
+					action("`")
+			if event.code == 2:
+				if shift:
+					action("!")
+				else:
+					action("1")
+			if event.code == 3:
+				if shift:
+					action("@")
+				else:
+					action("2")
+			if event.code == 4:
+				if shift:
+					action("#")
+				else:
+					action("3")
+			if event.code == 5:
+				if shift:
+					action("$")
+				else:
+					action("4")
+			if event.code == 6:
+				if shift:
+					action("%")
+				else:
+					action("5")
+			if event.code == 7:
+				if shift:
+					action("^")
+				else:
+					action("6")
+			if event.code == 8:
+				if shift:
+					action("&")
+				else:
+					action("7")
+			if event.code == 9:
+				if shift:
+					action("*")
+				else:
+					action("8")
+			if event.code == 10:
+				if shift:
+					action("(")
+				else:
+					action("9")
+			if event.code == 11:
+				if shift:
+					action(")")
+				else:
+					action("0")
+			if event.code == 12:
+				if shift:
+					action("_")
+				else:
+					action("-")
+			if event.code == 13:
+				if shift:
+					action("+")
+				else:
+					action("=")
+			if event.code == 26:
+				if shift:
+					action("[")
+				else:
+					action("{")
+			if event.code == 27:
+				if shift:
+					action("]")
+				else:
+					action("}")
+			if event.code == 43:
+				if shift:
+					action("|")
+				else:
+					action("\\")
+			if event.code == 39:
+				if shift:
+					action(":")
+				else:
+					action(";")
+			if event.code == 40:
+				if shift:
+					action("\"")
+				else:
+					action("'")
+			if event.code == 51:
+				if shift:
+					action("<")
+				else:
+					action(",")
+			if event.code == 52:
+				if shift:
+					action(">")
+				else:
+					action(".")
+			if event.code == 53:
+				if shift:
+					action("?")
+				else:
+					action("/")
+			if event.code == 57:
+				action(" ")
+			if event.code == 105:
+				nonlitaction("Left")
+			if event.code == 106:
+				nonlitaction("Right")
+			if event.code == 103:
+				nonlitaction("Up")
+			if event.code == 108:
+				nonlitaction("Down")
+			if event.code == 14:
+				nonlitaction("Backspace")
+			if event.code == 28:
+				nonlitaction("Enter")'''
+			print(event.code)
 		if event.value == 0:
-			if event.code == 42:
+			if event.code == 42: #leftshift
 				shift=False
-			if event.code == 54:
+			if event.code == 54: #rightshift
 				shift=False
