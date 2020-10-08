@@ -10,7 +10,6 @@ shift=False
 ctrl=False
 caps=False
 
-
 print(keyboard)
 
 ip_address = "localhost"
@@ -33,7 +32,7 @@ def urlencode(term):
 for event in keyboard.read_loop():
 	if event.type == ecodes.EV_KEY:
 		if event.value == 1:
-			'''if event.code == 42: #leftshift
+			if event.code == 42: #leftshift
 				shift=True
 			if event.code == 54: #rightshift
 				shift=True
@@ -290,8 +289,37 @@ for event in keyboard.read_loop():
 			if event.code == 14:
 				nonlitaction("Backspace")
 			if event.code == 28:
-				nonlitaction("Enter")'''
-			print(event.code)
+				nonlitaction("Enter")
+			if event.code == 62:
+				nonlitaction("Home")
+			if event.code == 66:
+				nonlitaction("Rev")
+			if event.code == 69:
+				nonlitaction("Fwd")
+			if event.code == 67:
+				nonlitaction("Play")
+			if event.code == 125:
+				nonlitaction("Select")
+			if event.code == 65:
+				nonlitaction("Back")
+			if event.code == 56:
+				nonlitaction("Back")
+			if event.code == 64:
+				nonlitaction("Search")
+			if event.code == 100:
+				nonlitaction("Info")
+			if event.code == 88:
+				nonlitaction("VolumeDown")
+			if event.code == 87:
+				nonlitaction("VolumeMute")
+			if event.code == 110:
+				nonlitaction("VolumeUp")
+			'''
+			if event.code == 29:
+				#left control
+			if event.code == 97:
+				#right control
+			'''
 		if event.value == 0:
 			if event.code == 42: #leftshift
 				shift=False
