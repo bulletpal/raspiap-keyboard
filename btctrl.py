@@ -14,8 +14,10 @@ print(keyboard)
 
 ip_address = "localhost"
 
-with open('/etc/tv-keyboard-ctrl/found_ip') as f:
-	ip_address = f.readline()[:-1]
+def get_ip_address():
+	with open('/etc/tv-keyboard-ctrl/found_ip') as f:
+		ip_address = f.readline()[:-1]
+get_ip_address()
 
 def nonlitaction(term):
 	os.system("curl -d '' \"http://" + ip_address + ":8060/keypress/" + term + "\"")
@@ -41,6 +43,8 @@ for event in keyboard.read_loop():
 					caps=False
 				else:
 					caps=True
+			if event.code == 29 or event.code == 97:
+				ctrl = True
 			if event.code == 16:
 				if shift:
 					action("Q")
@@ -107,10 +111,13 @@ for event in keyboard.read_loop():
 				else:
 					action("d")
 			if event.code == 33:
-				if shift:
-					action("F")
+				if ctrl:
+					get_ip_address()
 				else:
-					action("f")
+					if shift:
+						action("F")
+					else:
+						action("f")
 			if event.code == 34:
 				if shift:
 					action("G")
@@ -325,3 +332,5 @@ for event in keyboard.read_loop():
 				shift=False
 			if event.code == 54: #rightshift
 				shift=False
+			if event.code == 29 or event.code == 97:
+				ctrl = False
