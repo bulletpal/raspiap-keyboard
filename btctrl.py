@@ -17,7 +17,13 @@ ip_address = "localhost"
 def get_ip_address():
 	with open('/etc/tv-keyboard-ctrl/found_ip') as f:
 		ip_address = f.readline()[:-1]
-get_ip_address()
+		print(ip_address)
+		return ip_address
+ip_address = get_ip_address()
+
+def refresh_ip_address():
+	os.system("bash /etc/tv-keyboard-ctrl/get_ip.sh")
+	return get_ip_address()
 
 def nonlitaction(term):
 	os.system("curl -d '' \"http://" + ip_address + ":8060/keypress/" + term + "\"")
@@ -112,7 +118,7 @@ for event in keyboard.read_loop():
 					action("d")
 			if event.code == 33:
 				if ctrl:
-					get_ip_address()
+					ip_address = refresh_ip_address()
 				else:
 					if shift:
 						action("F")

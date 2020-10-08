@@ -1,7 +1,10 @@
-Starting Nmap 7.70 ( https://nmap.org ) at 2020-10-08 20:11 BST
+Starting Nmap 7.70 ( https://nmap.org ) at 2020-10-08 23:02 BST
+Nmap scan report for jacob-Inspiron-5577 (10.3.141.131)
+Host is up (0.013s latency).
+MAC Address: 9C:DA:3E:94:72:D5 (Intel Corporate)
 Nmap scan report for 10.3.141.144
-Host is up (0.0013s latency).
+Host is up (0.0018s latency).
 MAC Address: D4:AB:CD:53:1C:AD (Unknown)
 Nmap scan report for 10.3.141.1
 Host is up.
-Nmap done: 256 IP addresses (2 hosts up) scanned in 7.26 seconds
+Nmap done: 256 IP addresses (3 hosts up) scanned in 8.21 seconds
