@@ -1,7 +1,7 @@
 # raspiap-keyboard
 
 Put these files inside /etc/tv-keyboard-ctrl/<br>
-Create a service to start service-start.sh<br>
+Put service in /etc/systemd/system/<br>
 Put tv mac address in tv_mac<br>
 Put kb mac address in bt_connection_listener.py<br>
 Put local subnet in get_ip.sh
